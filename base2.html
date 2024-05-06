@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0 20px;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 20px 0;
+        }
+        table {
+            border-collapse: collapse;
+            margin-right: 20px;
+        }
+        th, td {
+            border: 1px solid #b0c4de;
+            padding: 8px;
+            text-align: left;
+        }
+        th.title, td.title {
+            width: 225px;
+        }
+        th.author, td.author {
+            width: 225px;
+        }
+        th.price, td.price {
+            width: 100px;
+        }
+        th.actions, td.actions {
+            width: 70px;
+        }
+        th {
+            background-color: #d3dde8;
+        }
+        a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            width: 320px;
+            border: 1px solid #b0c4de;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 0;
+        }
+        input, button {
+            width: 95%; /* Slightly reduced width */
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            width: 100%; /* Button width adjusted to full */
+            background-color: #0645ad;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #042e77;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to our bookstore!</h1>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="title">Title</th>
+                    <th class="author">Author</th>
+                    <th class="price">Price</th>
+                    <th class="actions">Delete</th>
+                    <th class="actions">Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in data %}
+                <tr>
+                    <td class="title">{{ book.title }}</td>
+                    <td class="author">{{ book.author }}</td>
+                    <td class="price">{{ book.price }}</td>
+                    <td class="actions"><a href="/delete_book/{{ book.id }}">Delete</a></td>
+                    <td class="actions"><a href="/update_book/{{ book.id }}">Update</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="form-container">
+            <form action="/add_book" method="POST">
+                <h2>Add a New Book:</h2>
+                <input type="number" name="id" placeholder="ID" required>
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="author" placeholder="Author" required>
+                <input type="text" name="price" placeholder="Price" required>
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
